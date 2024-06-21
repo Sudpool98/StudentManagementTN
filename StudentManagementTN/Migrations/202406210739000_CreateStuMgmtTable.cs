@@ -14,6 +14,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         Classno = c.Int(nullable: false),
                         Division = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
+                        Combined = c.String(nullable: false, maxLength: 3),
                     })
                 .PrimaryKey(t => t.Id);
             

@@ -44,7 +44,7 @@ namespace StudentManagementTN.Controllers
         // GET: Teachers/Create
         public ActionResult Create()
         {
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division");
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id","Classno");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace StudentManagementTN.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Classno", teacher.Classid);
             return View(teacher);
         }
 
