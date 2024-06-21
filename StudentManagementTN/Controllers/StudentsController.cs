@@ -19,6 +19,20 @@ namespace StudentManagementTN.Controllers
             return View();
         }
 
+        public ActionResult Portal(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
+
         // GET: Students
         public ActionResult Index()
         {
