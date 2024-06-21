@@ -44,7 +44,7 @@ namespace StudentManagementTN.Controllers
         // GET: Teachers/Create
         public ActionResult Create()
         {
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id","Classno");
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace StudentManagementTN.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Classno", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
             return View(teacher);
         }
 
@@ -78,7 +78,7 @@ namespace StudentManagementTN.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
             return View(teacher);
         }
 
@@ -95,7 +95,7 @@ namespace StudentManagementTN.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
             return View(teacher);
         }
 

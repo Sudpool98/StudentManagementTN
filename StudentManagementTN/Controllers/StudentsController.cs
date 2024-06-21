@@ -44,7 +44,7 @@ namespace StudentManagementTN.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division");
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined");
             ViewBag.Edustatusid = new SelectList(db.EduStatuses, "Id", "Status");
             return View();
         }
@@ -63,7 +63,7 @@ namespace StudentManagementTN.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", student.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", student.Classid);
             ViewBag.Edustatusid = new SelectList(db.EduStatuses, "Id", "Status", student.Edustatusid);
             return View(student);
         }
@@ -80,7 +80,7 @@ namespace StudentManagementTN.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", student.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", student.Classid);
             ViewBag.Edustatusid = new SelectList(db.EduStatuses, "Id", "Status", student.Edustatusid);
             return View(student);
         }
@@ -98,7 +98,7 @@ namespace StudentManagementTN.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", student.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", student.Classid);
             ViewBag.Edustatusid = new SelectList(db.EduStatuses, "Id", "Status", student.Edustatusid);
             return View(student);
         }
