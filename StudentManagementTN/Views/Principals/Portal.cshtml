@@ -4,9 +4,40 @@
     ViewBag.Title = "Portal";
 }
 
-<div class="d-grid gap-lg-5">
-    <h2 class="text-center">Principal Portal</h2>
-    @Html.ActionLink("Student Management", "Index", "Students", new { area = "" }, new { @class = "btn btn-lg btn-primary" })
-    @Html.ActionLink("Teacher Management", "Index", "Teachers", new { area = "" }, new { @class = "btn btn-lg btn-secondary" })
+<div class="container-fluid">
+    <div class="mt-3">
+        <h1 class="text-center">Principal Dashboard</h1>
+        <hr />
+    </div>
+    <div class="row text-center gap-3 mt-lg-5">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header bg-success text-light">Most Excellent</div>
+                <div class="card-body">
+                    <h2 class="card-title">1A</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header bg-warning text-dark">Most Average</div>
+                <div class="card-body">
+                    <h2 class="card-title">2B</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header bg-danger text-light">Most Poor</div>
+                <div class="card-body">
+                    <h2 class="card-title">3C</h2>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="d-grid gap-lg-5 mt-5">
+        @Html.ActionLink("Student Management", "Index", "Students", new { area = "" }, new { @class = "btn btn-lg btn-primary" })
+        @Html.ActionLink("Teacher Management", "Index", "Teachers", new { area = "" }, new { @class = "btn btn-lg btn-secondary" })
+    </div>
 </div>
-
