@@ -9,7 +9,8 @@ namespace StudentManagementTN.Models
 {
     public class StudentManagementDBContext : DbContext
     {
-        protected StudentManagementDBContext() : base("StudentManagementConnection")
+
+        public StudentManagementDBContext() : base("StudentManagementConnection")
         {
 
         }

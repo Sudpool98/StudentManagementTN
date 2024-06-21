@@ -16,7 +16,7 @@ namespace StudentManagementTN.Models
         public string Name { get; set; }
         [Index("IX_ContactUniqueKey", 1, IsUnique = true)]
         [Required, MaxLength(10)]
-        public int Contact { get; set; }
+        public string Contact { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
