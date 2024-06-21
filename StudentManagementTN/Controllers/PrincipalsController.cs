@@ -11,7 +11,6 @@ namespace StudentManagementTN.Controllers
     {
         private StudentManagementDBContext db = new StudentManagementDBContext();
 
-        // GET: Principals
         public ActionResult Portal()
         {
             return View();

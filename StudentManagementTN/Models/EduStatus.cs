@@ -16,7 +16,8 @@ namespace StudentManagementTN.Models
         public int Rank { get; set; }
         [Required, MaxLength(50)]
         public string Status { get; set; }
-
+        [Required]
+        public string Message { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }
 }

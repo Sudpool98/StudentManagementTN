@@ -44,6 +44,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         Rank = c.Int(nullable: false),
                         Status = c.String(nullable: false, maxLength: 50),
+                        Message = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
