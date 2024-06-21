@@ -12,6 +12,11 @@ namespace StudentManagementTN.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Index("IX_UsernameUniqueKey", 1, IsUnique = true)]
+        [Required, MaxLength(50)]
+        public string Username { get; set; }
+        [Required, MaxLength(50)]
+        public string Password { get; set; }
         [Required, MaxLength(50)]
         public string Name { get; set; }
         [Index("IX_ContactUniqueKey", 1, IsUnique = true)]

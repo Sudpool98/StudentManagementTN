@@ -16,22 +16,14 @@
                         Division = c.String(nullable: false, maxLength: 1, fixedLength: true, unicode: false),
                     })
                 .PrimaryKey(t => t.Id);
-
-            CreateTable(
-                "dbo.EduStatus",
-                c => new
-                {
-                    Id = c.Int(nullable: false, identity: true),
-                    Rank = c.Int(nullable: false),
-                    Status = c.String(nullable: false, maxLength: 50),
-                })
-                .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.Students",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(nullable: false, maxLength: 50),
+                        Password = c.String(nullable: false, maxLength: 50),
                         Name = c.String(nullable: false, maxLength: 50),
                         Address = c.String(nullable: false),
                         Edustatusid = c.Int(nullable: false),
@@ -40,14 +32,27 @@
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClassDivisions", t => t.Classid, cascadeDelete: true)
                 .ForeignKey("dbo.EduStatus", t => t.Edustatusid, cascadeDelete: true)
+                .Index(t => t.Username, unique: true, name: "IX_UsernameUniqueKey")
                 .Index(t => t.Edustatusid)
                 .Index(t => t.Classid);
+            
+            CreateTable(
+                "dbo.EduStatus",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Rank = c.Int(nullable: false),
+                        Status = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Teachers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(nullable: false, maxLength: 50),
+                        Password = c.String(nullable: false, maxLength: 50),
                         Name = c.String(nullable: false, maxLength: 50),
                         Contact = c.String(nullable: false, maxLength: 10),
                         Address = c.String(nullable: false),
@@ -55,6 +60,7 @@
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ClassDivisions", t => t.Classid, cascadeDelete: true)
+                .Index(t => t.Username, unique: true, name: "IX_UsernameUniqueKey")
                 .Index(t => t.Contact, unique: true, name: "IX_ContactUniqueKey")
                 .Index(t => t.Classid);
             
@@ -79,8 +85,10 @@
             DropIndex("dbo.Principals", "IX_UsernameUniqueKey");
             DropIndex("dbo.Teachers", new[] { "Classid" });
             DropIndex("dbo.Teachers", "IX_ContactUniqueKey");
+            DropIndex("dbo.Teachers", "IX_UsernameUniqueKey");
             DropIndex("dbo.Students", new[] { "Classid" });
             DropIndex("dbo.Students", new[] { "Edustatusid" });
+            DropIndex("dbo.Students", "IX_UsernameUniqueKey");
             DropTable("dbo.Principals");
             DropTable("dbo.Teachers");
             DropTable("dbo.EduStatus");

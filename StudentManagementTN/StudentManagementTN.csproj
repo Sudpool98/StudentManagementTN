@@ -209,6 +209,9 @@
     <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
     <Content Include="Views\Principals\Portal.cshtml" />
+    <Content Include="Views\Principals\Login.cshtml" />
+    <Content Include="Views\Students\Login.cshtml" />
+    <Content Include="Views\Teachers\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
