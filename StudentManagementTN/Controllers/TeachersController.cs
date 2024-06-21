@@ -14,11 +14,6 @@ namespace StudentManagementTN.Controllers
     {
         private StudentManagementDBContext db = new StudentManagementDBContext();
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
         // GET: Teachers
         public ActionResult Index()
         {
@@ -44,7 +39,7 @@ namespace StudentManagementTN.Controllers
         // GET: Teachers/Create
         public ActionResult Create()
         {
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined");
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division");
             return View();
         }
 
@@ -53,7 +48,7 @@ namespace StudentManagementTN.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Contact,Address,Classid")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "Id,Username,Password,Name,Contact,Address,Classid")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +57,7 @@ namespace StudentManagementTN.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", teacher.Classid);
             return View(teacher);
         }
 
@@ -78,7 +73,7 @@ namespace StudentManagementTN.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", teacher.Classid);
             return View(teacher);
         }
 
@@ -87,7 +82,7 @@ namespace StudentManagementTN.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Contact,Address,Classid")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "Id,Username,Password,Name,Contact,Address,Classid")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +90,7 @@ namespace StudentManagementTN.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
+            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Division", teacher.Classid);
             return View(teacher);
         }
 
