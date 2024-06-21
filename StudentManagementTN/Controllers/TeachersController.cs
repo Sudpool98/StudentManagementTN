@@ -14,6 +14,11 @@ namespace StudentManagementTN.Controllers
     {
         private StudentManagementDBContext db = new StudentManagementDBContext();
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // GET: Teachers
         public ActionResult Index()
         {
