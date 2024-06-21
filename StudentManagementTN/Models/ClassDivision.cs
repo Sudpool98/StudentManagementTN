@@ -13,6 +13,7 @@ namespace StudentManagementTN.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required,Range(1,12)]
+        [Display(Name = "Class")]
         public int Classno { get; set; }
         [Column(TypeName = "char")]
         [Required, MaxLength(1)]
