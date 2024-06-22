@@ -1,7 +1,9 @@
 Student Management System - TechNeurons
 
+
 The web application was developed using ASP.NET MVC(C#),Entity Framework for ORM and MS SQL Server.
 Entity Framework Code First approach was followed.
+
 
 Entity Framework Model Classes for Student, Teacher, Principal, ClassDivision, EduStatus were manually defined and assigned Data Annotations for Validations.
 Defining Class & Division(as ClassDivision) and Education Status(as EduStatus) as separate entities and referencing foreign key, 
@@ -16,16 +18,21 @@ ClassDivision as a separate entity and being foreign key referenced in Teacher a
 Teacher.ClassDivision.Students(which is a list of students linked to that classdivision).
 Basic Login functionality was implemented for Principal,Teacher and Student using Session[], Login Authentication done by controller and ViewModel.
 
+
 Challenges Faced:
+
+
 Listing Students of a Teacher's class, message for student according to edu status and Getting Most Excellent,Average and Poor class seemed too dificult intially when class,division and edu status were considered as attributes.
 Defining ClassDivision and EduStatus(with message as an attribute) as separate entities and referncing using foreign key in Teacher and Student made the task much easier and more efficient.
 Entity Framework model for ClassDivision contains the list of Teachers and Students (as it is a foreign key reference) making the operations much easier to perform.
+
 
 PROJECT SETUP
 
 Softwares Required : Microsoft Visual Studio(2022 Community) and Microsoft SQL Server(Express Edition 2022) & SQL Server Management Studio
 
 Steps:
+
 1.Download Project from Git and open SLN file in Visual Studio.
 
 2.In project open Web.config file(from root, not Views folder) and change the server in data source of the Connection String:
