@@ -4,10 +4,8 @@
     ViewBag.Title = "Portal";
 }
 
-<h2>Teacher</h2>
+<h2>Teacher @Html.ActionLink("Logout", "Logout", new { area = "" }, new { @class = "btn btn-outline-danger" })</h2>
 <hr />
-
-@Html.ActionLink("Logout", "Logout", new { area = "" }, new { @class = "btn btn-outline-danger" })
 
 <div>
     <dl class="dl-horizontal">

@@ -40,14 +40,14 @@ namespace StudentManagementTN.Controllers
                     if (principallist.Username == principal.Username && principallist.Password == principal.Password)   
                     {
                         Session["logged_in"] = 1;
-                        Session["id"] = principal.Id;
+                        Session["id"] = principallist.Id;
                         Session["user"] = 1;    //user implies type of user, 1 is Principal.
 
                         return RedirectToAction("Portal");
                     }
 
                 }
-                ModelState.AddModelError("password", "Username or Password Incorrect!");
+                ModelState.AddModelError("Password", "Username or Password Incorrect!");
             }
             return View(principal);
         }

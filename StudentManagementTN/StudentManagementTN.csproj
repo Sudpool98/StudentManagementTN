@@ -143,8 +143,10 @@
     <Compile Include="Models\EduStatus.cs" />
     <Compile Include="Models\Principal.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentLogin.cs" />
     <Compile Include="Models\StudentManagementDBContext.cs" />
     <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\TeacherLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

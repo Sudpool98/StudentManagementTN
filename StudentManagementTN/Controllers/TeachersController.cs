@@ -28,7 +28,7 @@ namespace StudentManagementTN.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Teacher teacher)      //Same logic as Principal Login
+        public ActionResult Login(TeacherLogin teacher)      //Same logic as Principal Login
         {
             var L1 = from teach in db.Teachers orderby teach.Id select teach;    //Get All
 
@@ -39,14 +39,14 @@ namespace StudentManagementTN.Controllers
                     if (teacherlist.Username == teacher.Username && teacherlist.Password == teacher.Password)
                     {
                         Session["logged_in"] = 1;
-                        Session["id"] = teacher.Id;
+                        Session["id"] = teacherlist.Id;
                         Session["user"] = 2;    //user implies type of user, 2 is Teacher.
 
                         return RedirectToAction("Portal");
                     }
 
                 }
-                ModelState.AddModelError("password", "Username or Password Incorrect!");
+                ModelState.AddModelError("Password", "Username or Password Incorrect!");
             }
             return View(teacher);
         }
