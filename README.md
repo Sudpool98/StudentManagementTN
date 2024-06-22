@@ -27,11 +27,15 @@ Softwares Required : Microsoft Visual Studio(2022 Community) and Microsoft SQL S
 
 Steps:
 1.Download Project from Git and open SLN file in Visual Studio.
+
 2.In project open Web.config file(from root, not Views folder) and change the server in data source of the Connection String:
   <connectionStrings><add name="StudentManagementConnection" connectionString="data source=SUDPOOL-ASUSROG\SQLEXPRESS;Initial Catalog=StudentManagementDB;Persist Security Info=True;Integrated Security=True;" providerName="System.Data.SqlClient" /></connectionStrings>
   Note: This connection string is for Windows Authentication in SQL Server
+
 3.In Visual Studio go to Tools -> NuGet Package Manager -> Package Manager Console
+
 4.In the Package Manager Console execute update-database command to run migrations which will create the database and all tables.
+
 5.In SQL Server Management Studio, connect to your server, open New Query in StudentManagementDB database(created by migrations in step 4) and run the following queries to input data for Principal,ClassDivision and EduStatus tables :
 
 INSERT INTO Principals VALUES ('principal','abc123')
@@ -81,6 +85,7 @@ VALUES
 (2,'Good','You have good grades! Now aim for the Top!'),
 (3,'Average','If you try more, you can be great at academics.'),
 (4,'Poor','Dont worry too much, give it your best and you can definitely improve.');
+
 
 6.Now the Project can be run in Visual Studio. Teacher and Student data can be added through the Principal portal(login credentials inserted in step 5) in the application.
 
