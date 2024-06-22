@@ -14,52 +14,122 @@ namespace StudentManagementTN.Controllers
     {
         private StudentManagementDBContext db = new StudentManagementDBContext();
 
-        public ActionResult Login()
+        public ActionResult Login()     //Same logic as Principal Login
         {
-            return View();
+            try
+            {
+                if ((int)Session["logged_in"] == 1)     
+                    return RedirectToAction("Logout");
+
+                return View();
+            }
+            catch (NullReferenceException) { return View(); }
         }
 
-        public ActionResult Portal(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Teacher teacher)      //Same logic as Principal Login
         {
-            if (id == null)
+            var L1 = from teach in db.Teachers orderby teach.Id select teach;    //Get All
+
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
+                foreach (Teacher teacherlist in L1)
+                {
+                    if (teacherlist.Username == teacher.Username && teacherlist.Password == teacher.Password)
+                    {
+                        Session["logged_in"] = 1;
+                        Session["id"] = teacher.Id;
+                        Session["user"] = 2;    //user implies type of user, 2 is Teacher.
+
+                        return RedirectToAction("Portal");
+                    }
+
+                }
+                ModelState.AddModelError("password", "Username or Password Incorrect!");
             }
             return View(teacher);
         }
 
+        public ActionResult Portal()
+        {
+            try
+            {
+                if ((int)Session["logged_in"] == 1 && (int)Session["user"] == 2)
+                {
+                    Teacher teacher = db.Teachers.Find((int)Session["id"]);
+                    if (teacher == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(teacher);
+                }
+                return RedirectToAction("Login");
+            }
+            catch (NullReferenceException) { return RedirectToAction("Login"); }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["logged_in"] = 0;
+            Session["id"] = 0;
+            Session["user"] = 0;
+
+            return RedirectToAction("Login");
+        }
+
+        //All Actions below are part of Teacher Management which can only be accessed by Principal, hence Principal login is checked.
         // GET: Teachers
         public ActionResult Index()
         {
-            var teachers = db.Teachers.Include(t => t.ClassDivision);
-            return View(teachers.ToList());
+            try     
+            {
+                if ((int)Session["logged_in"] == 1 && (int)Session["user"] == 1)
+                {
+                    var teachers = db.Teachers.Include(t => t.ClassDivision);
+                    return View(teachers.ToList());
+                }
+                return RedirectToAction("Login", "Principals");
+            }
+            catch (NullReferenceException) { return RedirectToAction("Login", "Principals"); }
         }
 
         // GET: Teachers/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if ((int)Session["logged_in"] == 1 && (int)Session["user"] == 1)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Teacher teacher = db.Teachers.Find(id);
+                    if (teacher == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(teacher);
+                }
+                return RedirectToAction("Login", "Principals");
             }
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(teacher);
+            catch (NullReferenceException) { return RedirectToAction("Login", "Principals"); }
         }
 
         // GET: Teachers/Create
         public ActionResult Create()
         {
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined");
-            return View();
+            try
+            {
+                if ((int)Session["logged_in"] == 1 && (int)Session["user"] == 1)
+                {
+                    ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined");
+                    return View();
+                }
+                return RedirectToAction("Login", "Principals");
+            }
+            catch (NullReferenceException) { return RedirectToAction("Login", "Principals"); }
         }
 
         // POST: Teachers/Create
@@ -83,17 +153,25 @@ namespace StudentManagementTN.Controllers
         // GET: Teachers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if ((int)Session["logged_in"] == 1 && (int)Session["user"] == 1)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Teacher teacher = db.Teachers.Find(id);
+                    if (teacher == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
+                    return View(teacher);
+                }
+                return RedirectToAction("Login", "Principals");
             }
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Classid = new SelectList(db.ClassDivisions, "Id", "Combined", teacher.Classid);
-            return View(teacher);
+            catch (NullReferenceException) { return RedirectToAction("Login", "Principals"); }
         }
 
         // POST: Teachers/Edit/5
@@ -116,16 +194,24 @@ namespace StudentManagementTN.Controllers
         // GET: Teachers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if ((int)Session["logged_in"] == 1 && (int)Session["user"] == 1)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Teacher teacher = db.Teachers.Find(id);
+                    if (teacher == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(teacher);
+                }
+                return RedirectToAction("Login", "Principals");
             }
-            Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(teacher);
+            catch (NullReferenceException) { return RedirectToAction("Login", "Principals"); }
         }
 
         // POST: Teachers/Delete/5

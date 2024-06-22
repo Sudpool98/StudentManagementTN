@@ -7,6 +7,8 @@
 <h2>Student Portal</h2>
 <hr />
 
+@Html.ActionLink("Logout", "Logout", new { area = "" }, new { @class = "btn btn-outline-danger" })
+
 <div class="card mb-3">
     <div class="card-header">Education Status : @Model.EduStatus.Status</div>
     <div class="card-body">
